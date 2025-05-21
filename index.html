@@ -410,6 +410,11 @@
             color: white;
         }
         
+        .post-content.responsible-ai {
+            background-color: #9C27B0; /* Purple for Responsible AI */
+            color: white;
+        }
+        
         .category-tag {
             display: inline-block;
             padding: 2px 8px;
@@ -606,6 +611,7 @@
             min-height: 300px;
             perspective: 1000px;
             width: 100%;
+            height: 100%;
         }
         
         .flashcard {
@@ -625,12 +631,14 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow-y: auto;
         }
         
         .flashcard-back {
@@ -877,8 +885,31 @@
                 <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
             </div>
             <div class="post-content twitter">
-                <div class="fact-title">Prompt Engineering</div>
-                <div class="fact-body">The technique of crafting effective input instructions for AI models. Well-designed prompts specify tasks clearly, provide context, set tone/style requirements, include constraints, and can utilize chain-of-thought techniques to guide the model through complex reasoning.</div>
+                <!-- Interactive Flashcard -->
+                <div class="flashcard-container">
+                    <div class="flashcard">
+                        <div class="flashcard-front">
+                            <div class="fact-title">Prompt Engineering</div>
+                            <div class="fact-body">What is prompt engineering and what are its key techniques?</div>
+                            <div class="flashcard-hint">Tap to reveal answer</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="fact-title">Prompt Engineering</div>
+                            <div class="fact-body">
+                                <p><strong>Definition:</strong> The technique of crafting effective input instructions for AI models.</p>
+                                <p><strong>Key Techniques:</strong></p>
+                                <ul style="text-align: left; padding-left: 15px;">
+                                    <li>Task specification: Clearly define what you want</li>
+                                    <li>Context provision: Provide background information</li>
+                                    <li>Output formatting: Specify desired format</li>
+                                    <li>Example inclusion: Demonstrate with examples</li>
+                                    <li>Chain-of-thought: Guide complex reasoning</li>
+                                </ul>
+                            </div>
+                            <div class="flashcard-hint">Tap to hide answer</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="category-tag">#GenAI #LLMs</div>
             </div>
             <div class="post-actions">
@@ -898,31 +929,8 @@
                 <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
             </div>
             <div class="post-content facebook">
-                <!-- Interactive Flashcard -->
-                <div class="flashcard-container">
-                    <div class="flashcard">
-                        <div class="flashcard-front">
-                            <div class="fact-title">Amazon Bedrock</div>
-                            <div class="fact-body">What is Amazon Bedrock and what are its key features?</div>
-                            <div class="flashcard-hint">Tap to reveal answer</div>
-                        </div>
-                        <div class="flashcard-back">
-                            <div class="fact-title">Amazon Bedrock</div>
-                            <div class="fact-body">
-                                <p><strong>Definition:</strong> A fully managed service providing access to foundation models through a unified API.</p>
-                                <p><strong>Key Features:</strong></p>
-                                <ul style="text-align: left; padding-left: 20px;">
-                                    <li>Access to models from AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon</li>
-                                    <li>Model evaluation capabilities</li>
-                                    <li>Model customization with your data</li>
-                                    <li>Managed inference with controls</li>
-                                    <li>Data privacy (data not used to train models)</li>
-                                </ul>
-                            </div>
-                            <div class="flashcard-hint">Tap to hide answer</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="fact-title">Amazon Bedrock</div>
+                <div class="fact-body">A fully managed service providing access to foundation models (FMs) from AI companies through a unified API. Enables building generative AI applications with features for model evaluation, customization with your data, and managed inference while maintaining data privacy.</div>
                 <div class="category-tag">#FoundationModels #ServicesCompare</div>
             </div>
             <div class="post-actions">
@@ -941,7 +949,7 @@
                 </div>
                 <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
             </div>
-            <div class="post-content">
+            <div class="post-content responsible-ai">
                 <div class="fact-title">Model Transparency</div>
                 <div class="fact-body">Transparent AI models explain how they reach conclusions, making decisions interpretable to humans. Important for safety-critical areas like healthcare and finance. AWS SageMaker Clarify helps achieve transparency through feature importance analysis and bias detection.</div>
                 <div class="category-tag">#EthicalAI #Explainability</div>
