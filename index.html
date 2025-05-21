@@ -1,0 +1,1033 @@
+<!-- Quiz Modal -->
+    <div class="quiz-modal">
+        <div class="quiz-content">
+            <div class="quiz-header">
+                <div class="quiz-title">Amazon Bedrock Quiz</div>
+                <div class="close-quiz"><i class="fas fa-times"></i></div>
+            </div>
+            <div class="quiz-question">
+                Which of the following is NOT a benefit of using Amazon Bedrock?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" data-correct="false">
+                    Access to foundation models from multiple providers through a single API
+                </div>
+                <div class="quiz-option" data-correct="false">
+                    Ability to customize foundation models with your own data
+                </div>
+                <div class="quiz-option" data-correct="false">
+                    Data privacy guarantees for your proprietary information
+                </div>
+                <div class="quiz-option" data-correct="true">
+                    Fully managed serverless Python runtime environment for model training
+                </div>
+            </div>
+            <div class="quiz-feedback"></div>
+            <div class="quiz-explanation">
+                Amazon Bedrock is a fully managed service that offers foundation models from various AI companies through a unified API. It provides model evaluation, customization, and managed inference with data privacy guarantees. However, it does not provide a managed Python runtime for model training - that would be a feature of Amazon SageMaker.
+            </div>
+            <button class="check-answer">Check Answer</button>
+            <button class="next-question">Next Question</button>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <div class="bottom-nav-item active"><i class="fas fa-home"></i></div>
+        <div class="bottom-nav-item"><i class="fas fa-search"></i></div>
+        <div class="bottom-nav-item"><i class="fas fa-graduation-cap"></i></div>
+        <div class="bottom-nav-item"><i class="fas fa-chart-line"></i></div>
+        <div class="bottom-nav-item"><i class="fas fa-user"></i></div>
+    </div>
+
+    <script>
+        // Simple JavaScript to simulate social media experience
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sample flashcard content for AWS Certified AI Practitioner
+            const flashcards = [
+                {
+                    domain: "Fundamentals of AI and ML",
+                    category: "Domain 1: 20%",
+                    title: "Learning Paradigms",
+                    content: "Supervised learning: Training with labeled data and feedback. Unsupervised learning: Finding patterns in unlabeled data. Reinforcement learning: Learning through trial, error, and rewards. Semi-supervised learning: Combining labeled and unlabeled data.",
+                    tags: "#MLBasics #LearningTypes"
+                },
+                {
+                    domain: "Fundamentals of Generative AI",
+                    category: "Domain 2: 24%",
+                    title: "Tokens & Embeddings",
+                    content: "Tokens are text chunks processed by LLMs. Embeddings are vector representations capturing semantic meaning, enabling models to understand relationships between words/concepts and perform similarity searches.",
+                    tags: "#GenAI #LLMBasics"
+                },
+                {
+                    domain: "Applications of Foundation Models",
+                    category: "Domain 3: 28%",
+                    title: "Amazon Q",
+                    content: "AWS's conversational AI assistant that helps with coding, documentation, architectural advice, and AWS resource management. Integrates with IDEs, connects to enterprise data, and can be customized with guardrails.",
+                    tags: "#AWSServices #GenAI" 
+                },
+                {
+                    domain: "Guidelines for Responsible AI",
+                    category: "Domain 4: 14%",
+                    title: "Fairness in AI",
+                    content: "AI systems should deliver equitable outcomes across different demographic groups. Evaluate models for bias using metrics like statistical parity and equal opportunity difference. Use tools like Amazon SageMaker Clarify to detect and mitigate bias.",
+                    tags: "#ResponsibleAI #Ethics"
+                },
+                {
+                    domain: "Security, Compliance & Governance",
+                    category: "Domain 5: 14%",
+                    title: "AWS Tools for AI Governance",
+                    content: "AWS Config: Assess and audit resource configurations. Amazon Inspector: Automated security assessments. AWS CloudTrail: Track user activity and API usage. IAM: Define fine-grained access controls for AI resources.",
+                    tags: "#Security #Governance"
+                }
+            ];
+            
+            // Quiz questions for each domain
+            const quizQuestions = [
+                {
+                    domain: "Fundamentals of AI and ML",
+                    question: "Which learning paradigm involves training a model with labeled data where the correct answers are provided?",
+                    options: [
+                        "Unsupervised learning",
+                        "Supervised learning",
+                        "Reinforcement learning", 
+                        "Transfer learning"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Supervised learning uses labeled training data with input-output pairs to teach the model to make predictions. The model learns to map inputs to correct outputs based on examples."
+                },
+                {
+                    domain: "Fundamentals of Generative AI",
+                    question: "What is prompt engineering in the context of generative AI?",
+                    options: [
+                        "Writing code to optimize model architecture",
+                        "Creating hardware specifications for AI systems",
+                        "Crafting effective input instructions to guide AI outputs",
+                        "The process of fine-tuning model parameters"
+                    ],
+                    correctIndex: 2,
+                    explanation: "Prompt engineering is the technique of designing and refining inputs given to AI models to elicit desired responses. It's crucial for directing foundation models to generate specific and useful outputs."
+                },
+                {
+                    domain: "Applications of Foundation Models",
+                    question: "Which of the following is NOT a feature of Amazon Bedrock?",
+                    options: [
+                        "Access to foundation models from multiple providers",
+                        "Model customization capabilities",
+                        "Built-in data labeling for supervised learning",
+                        "Governance controls for responsible AI"
+                    ],
+                    correctIndex: 2,
+                    explanation: "Amazon Bedrock does not provide built-in data labeling services. Data labeling would be handled by services like Amazon SageMaker Ground Truth. Bedrock focuses on providing, customizing, and deploying foundation models."
+                }
+            ];
+            
+            // Handle Story clicking
+            const stories = document.querySelectorAll('.story');
+            stories.forEach(story => {
+                story.addEventListener('click', () => {
+                    // In a full implementation, this would filter content based on selected category
+                    alert(`Filter by ${story.querySelector('.story-username').textContent} domain content`);
+                });
+            });
+
+            // Handle interactive flashcard flip
+            const flashcard = document.querySelector('.flashcard');
+            if (flashcard) {
+                flashcard.addEventListener('click', () => {
+                    flashcard.classList.toggle('flipped');
+                });
+            }
+
+            // Handle quiz modal
+            const quizTrigger = document.querySelector('.quiz-trigger');
+            const quizModal = document.querySelector('.quiz-modal');
+            const closeQuiz = document.querySelector('.close-quiz');
+            
+            if (quizTrigger && quizModal && closeQuiz) {
+                quizTrigger.addEventListener('click', () => {
+                    quizModal.style.display = 'flex';
+                });
+                
+                closeQuiz.addEventListener('click', () => {
+                    quizModal.style.display = 'none';
+                    resetQuiz();
+                });
+            }
+
+            // Handle quiz interactions
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            const checkAnswerBtn = document.querySelector('.check-answer');
+            const nextQuestionBtn = document.querySelector('.next-question');
+            const quizFeedback = document.querySelector('.quiz-feedback');
+            const quizExplanation = document.querySelector('.quiz-explanation');
+
+            if (quizOptions.length && checkAnswerBtn && nextQuestionBtn) {
+                // Select an option
+                quizOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // Remove selected class from all options
+                        quizOptions.forEach(opt => opt.classList.remove('selected'));
+                        // Add selected class to clicked option
+                        option.classList.add('selected');
+                    });
+                });
+
+                // Check answer
+                checkAnswerBtn.addEventListener('click', () => {
+                    const selectedOption = document.querySelector('.quiz-option.selected');
+                    
+                    if (!selectedOption) {
+                        alert('Please select an option');
+                        return;
+                    }
+                    
+                    const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+                    
+                    // Show correct/incorrect feedback
+                    quizOptions.forEach(option => {
+                        if (option.getAttribute('data-correct') === 'true') {
+                            option.classList.add('correct');
+                        } else if (option === selectedOption && !isCorrect) {
+                            option.classList.add('incorrect');
+                        }
+                    });
+                    
+                    // Show feedback and explanation
+                    quizFeedback.textContent = isCorrect ? 'Correct! Well done!' : 'Incorrect! See the correct answer above.';
+                    quizFeedback.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+                    quizFeedback.style.display = 'block';
+                    quizExplanation.style.display = 'block';
+                    
+                    // Hide check button, show next button
+                    checkAnswerBtn.style.display = 'none';
+                    nextQuestionBtn.style.display = 'block';
+                });
+
+                // Next question or close
+                nextQuestionBtn.addEventListener('click', () => {
+                    // In a full implementation, this would load the next question
+                    // For demo, just reset and close
+                    quizModal.style.display = 'none';
+                    resetQuiz();
+                });
+            }
+
+            // Reset quiz state
+            function resetQuiz() {
+                quizOptions.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                quizFeedback.style.display = 'none';
+                quizExplanation.style.display = 'none';
+                checkAnswerBtn.style.display = 'block';
+                nextQuestionBtn.style.display = 'none';
+            }
+            
+            // In a full implementation, more functions would be added for:
+            // - Saving progress
+            // - Tracking completion
+            // - Loading more content dynamically
+            // - User profile and achievements
+        });
+    </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnGram - Social Learning</title>
+    <style>
+        :root {
+            --primary-color: #4267B2;
+            --twitter-color: #1DA1F2;
+            --instagram-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --background-color: #f0f2f5;
+            --card-color: #ffffff;
+            --text-color: #1c1e21;
+            --secondary-text: #65676b;
+            --border-color: #dddfe2;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 60px;
+        }
+        
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: var(--card-color);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            background: var(--instagram-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            color: var(--text-color);
+        }
+        
+        .stories {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px;
+            background-color: var(--card-color);
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            scrollbar-width: none;
+        }
+        
+        .stories::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .story {
+            flex: 0 0 auto;
+            width: 65px;
+            margin-right: 12px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .story-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--instagram-gradient);
+            padding: 2px;
+            margin-bottom: 4px;
+        }
+        
+        .story-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid white;
+            object-fit: cover;
+        }
+        
+        .story-username {
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .post {
+            background-color: var(--card-color);
+            margin-bottom: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+        }
+        
+        .post-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .post-user {
+            flex-grow: 1;
+        }
+        
+        .post-username {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .post-meta {
+            font-size: 12px;
+            color: var(--secondary-text);
+        }
+        
+        .post-options {
+            font-size: 16px;
+        }
+        
+        .post-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            padding: 20px;
+            min-height: 300px;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        
+        .post-content.twitter {
+            background-color: var(--twitter-color);
+            color: white;
+        }
+        
+        .post-content.facebook {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .post-content.instagram {
+            background: var(--instagram-gradient);
+            color: white;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: rgba(0,0,0,0.1);
+            color: inherit;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .fact-title {
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .fact-body {
+            font-weight: 400;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--card-color);
+            padding: 10px 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .bottom-nav-item {
+            font-size: 24px;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        
+        .bottom-nav-item.active {
+            color: var(--primary-color);
+        }
+        
+        /* Quiz Modal Styles */
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .quiz-content {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .close-quiz {
+            font-size: 22px;
+            cursor: pointer;
+        }
+        
+        .quiz-question {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-option {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f0f2f5;
+        }
+        
+        .quiz-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(66, 103, 178, 0.1);
+        }
+        
+        .quiz-option.correct {
+            border-color: #4CAF50;
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        .quiz-option.incorrect {
+            border-color: #F44336;
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+        
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .quiz-feedback.correct {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
+        
+        .quiz-feedback.incorrect {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: #F44336;
+        }
+        
+        .quiz-explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .check-answer {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .next-question {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        /* Interactive Flashcard Styles */
+        .flashcard-container {
+            position: relative;
+            min-height: 300px;
+            perspective: 1000px;
+            width: 100%;
+        }
+        
+        .flashcard {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .flashcard-back {
+            transform: rotateY(180deg);
+            text-align: left;
+        }
+        
+        .flashcard-hint {
+            position: absolute;
+            bottom: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Progress Tracker */
+        .progress-tracker {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 15px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .tracker-title {
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .domains-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .domain-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .domain-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        
+        .domain-name {
+            font-weight: 600;
+        }
+        
+        .domain-percentage {
+            color: var(--secondary-text);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        
+        .domain-1 .progress-fill {
+            background-color: #4CAF50;
+            width: 65%;
+        }
+        
+        .domain-2 .progress-fill {
+            background-color: #2196F3;
+            width: 40%;
+        }
+        
+        .domain-3 .progress-fill {
+            background-color: #FF9800;
+            width: 30%;
+        }
+        
+        .domain-4 .progress-fill {
+            background-color: #9C27B0;
+            width: 55%;
+        }
+        
+        .domain-5 .progress-fill {
+            background-color: #F44336;
+            width: 25%;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #121212;
+                --card-color: #242526;
+                --text-color: #e4e6eb;
+                --secondary-text: #b0b3b8;
+                --border-color: #3e4042;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">LearnGram</div>
+            <div class="navigation">
+                <div class="nav-icon"><i class="fas fa-plus-square"></i></div>
+                <div class="nav-icon"><i class="fas fa-heart"></i></div>
+                <div class="nav-icon"><i class="fas fa-paper-plane"></i></div>
+            </div>
+        </div>
+        
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <div class="tracker-header">
+                <div class="tracker-title">Your Study Progress</div>
+                <div class="tracker-action"><i class="fas fa-ellipsis-h"></i></div>
+            </div>
+            <div class="domains-progress">
+                <div class="domain-item domain-1">
+                    <div class="domain-info">
+                        <div class="domain-name">Domain 1: AI & ML Fundamentals</div>
+                        <div class="domain-percentage">65%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="domain-item domain-2">
+                    <div class="domain-info">
+                        <div class="domain-name">Domain 2: Generative AI</div>
+                        <div class="domain-percentage">40%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="domain-item domain-3">
+                    <div class="domain-info">
+                        <div class="domain-name">Domain 3: Foundation Models</div>
+                        <div class="domain-percentage">30%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="domain-item domain-4">
+                    <div class="domain-info">
+                        <div class="domain-name">Domain 4: Responsible AI</div>
+                        <div class="domain-percentage">55%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="domain-item domain-5">
+                    <div class="domain-info">
+                        <div class="domain-name">Domain 5: Security & Compliance</div>
+                        <div class="domain-percentage">25%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stories">
+            <div class="story">
+                <div class="story-avatar">
+                    <img src="/api/placeholder/60/60" alt="AI & ML">
+                </div>
+                <div class="story-username">AI & ML</div>
+            </div>
+            <div class="story">
+                <div class="story-avatar">
+                    <img src="/api/placeholder/60/60" alt="GenAI">
+                </div>
+                <div class="story-username">GenAI</div>
+            </div>
+            <div class="story">
+                <div class="story-avatar">
+                    <img src="/api/placeholder/60/60" alt="Foundation Models">
+                </div>
+                <div class="story-username">FM Apps</div>
+            </div>
+            <div class="story">
+                <div class="story-avatar">
+                    <img src="/api/placeholder/60/60" alt="Responsible AI">
+                </div>
+                <div class="story-username">Resp. AI</div>
+            </div>
+            <div class="story">
+                <div class="story-avatar">
+                    <img src="/api/placeholder/60/60" alt="Security">
+                </div>
+                <div class="story-username">Security</div>
+            </div>
+            <div class="story">
+                <div class="story-avatar">
+                    <img src="/api/placeholder/60/60" alt="Services">
+                </div>
+                <div class="story-username">Services</div>
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <img src="/api/placeholder/36/36" alt="AI & ML" class="post-avatar">
+                <div class="post-user">
+                    <div class="post-username">Fundamentals of AI and ML</div>
+                    <div class="post-meta">Domain 1: 20% of Exam • Now</div>
+                </div>
+                <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
+            </div>
+            <div class="post-content instagram">
+                <div class="fact-title">AI vs ML vs Deep Learning</div>
+                <div class="fact-body">AI is the broader concept of machines performing tasks that typically require human intelligence. ML is a subset of AI where systems learn from data without explicit programming. Deep Learning is a subset of ML using neural networks with multiple layers to process complex patterns.</div>
+                <div class="category-tag">#AIBasics #MachineLearning</div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action"><i class="far fa-bookmark"></i> Save</div>
+                <div class="post-action"><i class="far fa-comments"></i> Quiz Me</div>
+                <div class="post-action"><i class="fas fa-share"></i> Share</div>
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <img src="/api/placeholder/36/36" alt="GenAI" class="post-avatar">
+                <div class="post-user">
+                    <div class="post-username">Fundamentals of Generative AI</div>
+                    <div class="post-meta">Domain 2: 24% of Exam • 2h ago</div>
+                </div>
+                <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
+            </div>
+            <div class="post-content twitter">
+                <div class="fact-title">Prompt Engineering</div>
+                <div class="fact-body">The technique of crafting effective input instructions for AI models. Well-designed prompts specify tasks clearly, provide context, set tone/style requirements, include constraints, and can utilize chain-of-thought techniques to guide the model through complex reasoning.</div>
+                <div class="category-tag">#GenAI #LLMs</div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action"><i class="far fa-bookmark"></i> Save</div>
+                <div class="post-action"><i class="far fa-comments"></i> Quiz Me</div>
+                <div class="post-action"><i class="fas fa-share"></i> Share</div>
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <img src="/api/placeholder/36/36" alt="Foundation Models" class="post-avatar">
+                <div class="post-user">
+                    <div class="post-username">Applications of Foundation Models</div>
+                    <div class="post-meta">Domain 3: 28% of Exam • 3h ago</div>
+                </div>
+                <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
+            </div>
+            <div class="post-content facebook">
+                <!-- Interactive Flashcard -->
+                <div class="flashcard-container">
+                    <div class="flashcard">
+                        <div class="flashcard-front">
+                            <div class="fact-title">Amazon Bedrock</div>
+                            <div class="fact-body">What is Amazon Bedrock and what are its key features?</div>
+                            <div class="flashcard-hint">Tap to reveal answer</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="fact-title">Amazon Bedrock</div>
+                            <div class="fact-body">
+                                <p><strong>Definition:</strong> A fully managed service providing access to foundation models through a unified API.</p>
+                                <p><strong>Key Features:</strong></p>
+                                <ul style="text-align: left; padding-left: 20px;">
+                                    <li>Access to models from AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon</li>
+                                    <li>Model evaluation capabilities</li>
+                                    <li>Model customization with your data</li>
+                                    <li>Managed inference with controls</li>
+                                    <li>Data privacy (data not used to train models)</li>
+                                </ul>
+                            </div>
+                            <div class="flashcard-hint">Tap to hide answer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-tag">#FoundationModels #ServicesCompare</div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action"><i class="far fa-bookmark"></i> Save</div>
+                <div class="post-action quiz-trigger"><i class="far fa-comments"></i> Quiz Me</div>
+                <div class="post-action"><i class="fas fa-share"></i> Share</div>
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <img src="/api/placeholder/36/36" alt="Responsible AI" class="post-avatar">
+                <div class="post-user">
+                    <div class="post-username">Guidelines for Responsible AI</div>
+                    <div class="post-meta">Domain 4: 14% of Exam • 5h ago</div>
+                </div>
+                <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
+            </div>
+            <div class="post-content">
+                <div class="fact-title">Model Transparency</div>
+                <div class="fact-body">Transparent AI models explain how they reach conclusions, making decisions interpretable to humans. Important for safety-critical areas like healthcare and finance. AWS SageMaker Clarify helps achieve transparency through feature importance analysis and bias detection.</div>
+                <div class="category-tag">#EthicalAI #Explainability</div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action"><i class="far fa-bookmark"></i> Save</div>
+                <div class="post-action"><i class="far fa-comments"></i> Quiz Me</div>
+                <div class="post-action"><i class="fas fa-share"></i> Share</div>
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <img src="/api/placeholder/36/36" alt="Security" class="post-avatar">
+                <div class="post-user">
+                    <div class="post-username">Security, Compliance & Governance</div>
+                    <div class="post-meta">Domain 5: 14% of Exam • 8h ago</div>
+                </div>
+                <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
+            </div>
+            <div class="post-content instagram">
+                <div class="fact-title">AI Security Considerations</div>
+                <div class="fact-body">Key AI security concerns include prompt injection attacks, data poisoning, model stealing, inference manipulation, and data privacy breaches. AWS tools like IAM roles, encryption, VPC endpoints, CloudTrail, and Macie help secure AI applications throughout the lifecycle.</div>
+                <div class="category-tag">#AISecurity #Compliance</div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action"><i class="far fa-bookmark"></i> Save</div>
+                <div class="post-action"><i class="far fa-comments"></i> Quiz Me</div>
+                <div class="post-action"><i class="fas fa-share"></i> Share</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <div class="bottom-nav-item active"><i class="fas fa-home"></i></div>
+        <div class="bottom-nav-item"><i class="fas fa-search"></i></div>
+        <div class="bottom-nav-item"><i class="fas fa-graduation-cap"></i></div>
+        <div class="bottom-nav-item"><i class="fas fa-chart-line"></i></div>
+        <div class="bottom-nav-item"><i class="fas fa-user"></i></div>
+    </div>
+
+    <script>
+        // Simple JavaScript to simulate social media experience
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sample flashcard content for AWS Certified AI Practitioner
+            const flashcards = [
+                {
+                    domain: "Fundamentals of AI and ML",
+                    category: "Domain 1: 20%",
+                    title: "Learning Paradigms",
+                    content: "Supervised learning: Training with labeled data and feedback. Unsupervised learning: Finding patterns in unlabeled data. Reinforcement learning: Learning through trial, error, and rewards. Semi-supervised learning: Combining labeled and unlabeled data.",
+                    tags: "#MLBasics #LearningTypes"
+                },
+                {
+                    domain: "Fundamentals of Generative AI",
+                    category: "Domain 2: 24%",
+                    title: "Tokens & Embeddings",
+                    content: "Tokens are text chunks processed by LLMs. Embeddings are vector representations capturing semantic meaning, enabling models to understand relationships between words/concepts and perform similarity searches.",
+                    tags: "#GenAI #LLMBasics"
+                },
+                {
+                    domain: "Applications of Foundation Models",
+                    category: "Domain 3: 28%",
+                    title: "Amazon Q",
+                    content: "AWS's conversational AI assistant that helps with coding, documentation, architectural advice, and AWS resource management. Integrates with IDEs, connects to enterprise data, and can be customized with guardrails.",
+                    tags: "#AWSServices #GenAI" 
+                },
+                {
+                    domain: "Guidelines for Responsible AI",
+                    category: "Domain 4: 14%",
+                    title: "Fairness in AI",
+                    content: "AI systems should deliver equitable outcomes across different demographic groups. Evaluate models for bias using metrics like statistical parity and equal opportunity difference. Use tools like Amazon SageMaker Clarify to detect and mitigate bias.",
+                    tags: "#ResponsibleAI #Ethics"
+                },
+                {
+                    domain: "Security, Compliance & Governance",
+                    category: "Domain 5: 14%",
+                    title: "AWS Tools for AI Governance",
+                    content: "AWS Config: Assess and audit resource configurations. Amazon Inspector: Automated security assessments. AWS CloudTrail: Track user activity and API usage. IAM: Define fine-grained access controls for AI resources.",
+                    tags: "#Security #Governance"
+                }
+            ];
+            
+            // This would be where we'd implement dynamic content loading
+            // For a real application, consider implementing React or Vue.js
+        });
+    </script>
+</body>
+</html>
